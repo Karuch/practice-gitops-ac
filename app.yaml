@@ -21,7 +21,7 @@ spec:
         imagePullPolicy: Always  # Ensure the image is always pulled
         env:
         - name: BACKGROUND_COLOR
-          value: "yellow"
+          value: "blue"
         ports:
         - containerPort: 80
 ---
