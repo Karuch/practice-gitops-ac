@@ -7,7 +7,7 @@ spec:
   project: default
   source:
     repoURL: https://github.com/Karuch/practice-gitops-ac
-    targetRevision: apps
+    targetRevision: multi
     path: ./apps
   destination:
     server: https://kubernetes.default.svc
