@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: colors
-  namespace: colors-main
+  namespace: argocd
 spec:
   project: default
   source:
@@ -11,7 +11,7 @@ spec:
     path: ./
   destination:
     server: https://kubernetes.default.svc
-    namespace: colors
+    namespace: colors-main
   syncPolicy:
     automated:
       prune: true          # Automatically delete resources not defined in the Git repository
