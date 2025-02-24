@@ -1,0 +1,4 @@
+apiVersion: v3
+name: color
+description: color app to win project david
+version: 0.2.0

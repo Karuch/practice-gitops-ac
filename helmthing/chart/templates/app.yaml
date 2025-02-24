@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ .Release.Name }}-{{ .Chart.Name }}-tal-statefulset
+  labels:
+    app: {{ .Release.Name }}-{{ .Chart.Name }}-taltestapp
+spec:
+  serviceName: {{ .Release.Name }}-{{ .Chart.Name }}-tal-service
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-{{ .Chart.Name }}-taltestapp
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-{{ .Chart.Name }}-taltestapp
+    spec: 
+      containers:
+      - name: tal-container
+        image: talk474747/talteststuff:tal-study-gitops
+        imagePullPolicy: Always  # Ensure the image is always pulled
+        env:
+        - name: BACKGROUND_COLOR
+          value: {{ .Values.color }}
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-{{ .Chart.Name }}-tal-service
+  labels:
+    app: {{ .Release.Name }}-{{ .Chart.Name }}-taltestapp
+spec:
+  selector:
+    app: {{ .Release.Name }}-{{ .Chart.Name }}-taltestapp
+  ports:
+  - port: 80
+    targetPort: 80
+  type: NodePort

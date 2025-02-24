@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "{{ .Release.Name }}-test-service"
+  annotations:
+    "helm.sh/hook": test
+spec:
+  containers:
+    - name: test
+      image: curlimages/curl:latest
+      command: ["curl", "-s", "-o", "/dev/null", "-w", "%{http_code}", "http://{{ .Release.Name }}-{{ .Chart.Name }}-tal-service:90"]
+  restartPolicy: Never
